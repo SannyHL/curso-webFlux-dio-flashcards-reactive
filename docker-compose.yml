@@ -4,7 +4,7 @@ services:
   app:
     build:
       context: .
-    command: bash start.sh
+    command: ./start.sh
     ports:
       - "8080:8080"
       - "5005:5005"
