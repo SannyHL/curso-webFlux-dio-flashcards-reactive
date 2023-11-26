@@ -1,6 +1,6 @@
 FROM maven:3.8.5-openjdk-17 AS builder
 
-COPY ./settings.xml /root/.m2/settings.xml
+
 
 WORKDIR /app
 COPY ./pom.xml ./pom.xml
@@ -15,4 +15,10 @@ RUN mkdir -p $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH
 
-COPY . .
+COPY --from=builder /app/target/flashcards-reactive-1.0.0.jar .
+
+COPY ./start.sh .
+
+RUN chmod +x start.sh
+
+CMD ["./start.sh"]
